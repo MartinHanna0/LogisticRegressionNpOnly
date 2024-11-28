@@ -62,7 +62,7 @@ Ensure your training and test datasets are stored in Numpy arrays:
 
 3. **Run the Script**:
 
-python main.py
+python logistic_regression.py
 
 4. **View the Results**:
 
