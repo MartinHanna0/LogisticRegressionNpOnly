@@ -74,78 +74,57 @@ python main.py
 - **Weights (`weights`)**: 
   - Initialized with random values of shape `(n_features, 1)`.
 - **Bias (`bias`)**: 
-  - Initialized to 0.
+  - Initialized to `0`.
 
 ---
 
 ### 2. Forward Propagation
 - **Purpose**: Computes predicted probabilities (`y_pred`) using the sigmoid function.
 - **Formula**:
-  \[
-  y_{\text{pred}} = \frac{1}{1 + e^{-z}}
-  \]
-  Where:
-  \[
-  z = X \cdot W + b
-  \]
+  - `y_pred = 1 / (1 + exp(-z))`
+  - Where `z = X * W + b`
 
 ---
 
 ### 3. Backward Propagation
 - **Purpose**: Computes gradients of the loss with respect to weights (`dl_dw`) and bias (`dl_db`).
 - **Formulas**:
-  \[
-  \frac{\partial L}{\partial W} = \frac{1}{m} X^T \cdot (y_{\text{pred}} - y)
-  \]
-  \[
-  \frac{\partial L}{\partial b} = \frac{1}{m} \sum (y_{\text{pred}} - y)
-  \]
+  - Gradient of weights:  
+    `dl_dw = (1 / m) * X.T * (y_pred - y)`
+  - Gradient of bias:  
+    `dl_db = (1 / m) * sum(y_pred - y)`
 
 ---
 
 ### 4. Error Function
 - **Purpose**: Implements binary cross-entropy loss to evaluate model performance.
-- **Formula**:
-  \[
-  L = -\frac{1}{m} \sum \left( y \cdot \log(y_{\text{pred}}) + (1 - y) \cdot \log(1 - y_{\text{pred}}) \right)
-  \]
+- **Formula**:  
+  `L = -(1 / m) * sum(y * log(y_pred) + (1 - y) * log(1 - y_pred))`
 
 ---
 
 ### 5. Performance Metrics
 - **Purpose**: Evaluates model predictions using key metrics:
-  - **Accuracy**:
-    \[
-    \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-    \]
-  - **Recall**:
-    \[
-    \text{Recall} = \frac{TP}{TP + FN}
-    \]
-  - **Precision**:
-    \[
-    \text{Precision} = \frac{TP}{TP + FP}
-    \]
-  - **F1 Score**:
-    \[
-    F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
-    \]
+  - **Accuracy**:  
+    `(TP + TN) / (TP + TN + FP + FN)`
+  - **Recall**:  
+    `TP / (TP + FN)`
+  - **Precision**:  
+    `TP / (TP + FP)`
+  - **F1 Score**:  
+    `2 * (Precision * Recall) / (Precision + Recall)`
 
 ---
 
 ### 6. Training Loop
 - **Purpose**: Updates parameters iteratively to minimize the error:
-  - Weight update:
-    \[
-    W = W - \eta \cdot \frac{\partial L}{\partial W}
-    \]
-  - Bias update:
-    \[
-    b = b - \eta \cdot \frac{\partial L}{\partial b}
-    \]
+  - **Weight update**:  
+    `W = W - learning_rate * dl_dw`
+  - **Bias update**:  
+    `b = b - learning_rate * dl_db`
 - **Additional Details**:
   - The loop runs for a predefined number of epochs.
-  - Learning rate is periodically decreased to enhance convergence.
+  - The learning rate is periodically decreased to enhance convergence.
   - Training progress and error metrics are logged after every few iterations.
 
 ---
